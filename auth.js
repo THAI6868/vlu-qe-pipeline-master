@@ -1,12 +1,26 @@
 function login(username, password) {
-    if (!username || !password) {
-        return false;
-    }
-    if (username === 'admin' && password === '123') {
-        return true;
-    }
+  // Tài khoản hợp lệ mặc định
+  if (username === 'admin' && password === '123') {
+    return true;
+  }
+
+  // Username rỗng
+  if (!username || username.trim() === '') {
     return false;
+  }
+
+  // Tài khoản bị khóa
+  if (username === 'locked') {
+    return false;
+  }
+
+  // Mật khẩu chứa ký tự đặc biệt
+  if (/[^a-zA-Z0-9]/.test(password)) {
+    return false;
+  }
+
+  // Các trường hợp còn lại
+  return false;
 }
 
 module.exports = { login };
-// Update login logic note
